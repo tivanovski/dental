@@ -1,9 +1,10 @@
 <?php
+$dbopts = parse_url(getenv('DATABASE_URL'));
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
-    'username' => 'root',
-    'password' => '',
+    'dsn' => 'pgsql:host='.$dbopts["host"].':'.$dbopts["port"].';dbname='.ltrim($dbopts["path"],'/'),
+    'username' =>  $dbopts["user"],
+    'password' =>  $dbopts["pass"],
     'charset' => 'utf8',
 ];
